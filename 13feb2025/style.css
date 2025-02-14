@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+
+  /* Product hover effect */
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card img {
+      width: 100%;
+    border-radius: 12px;
+
+  }
+
+  .feature-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 12px;
+  }
+
+  .feature-card:hover .feature-text {
+    opacity: 1;
+  }
+  /* Hero section styling */
+  .hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+
+  .hero-section video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .hero-content {
+    z-index: 2;
+  }
+
+  .feature-card, .testimonial-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    background-color: #ffffff;
+    text-align: center;
+  }
+
+  footer {
+    background-color: #343a40;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .social-links a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+
+  .contact-image img {
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+  }
+
+  .wrapper.two {
+
+
+  font-family: "Play", sans-serif;
+}
+.neon h3 {
+  margin: 1rem auto;
+  animation: neon 1s ease infinite;
+ 
+}
+@keyframes neon {
+  0%,
+  100% {
+      text-shadow: 0 0 10px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 2px #fed128, 2px 2px 2px #806914;
+      color: #f5efcb;
+  }
+  50% {
+      text-shadow: 0 0 2px #800e0b, 0 0 5px #800e0b, 0 0 5px #800e0b, 0 0 5px #800e0b, 0 0 2px #800e0b, 4px 4px 2px #40340a;
+      color: #eda0d3;
+  }
+}
