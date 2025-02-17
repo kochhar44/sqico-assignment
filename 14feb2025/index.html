@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="This is a brief description of your webpage content to attract users from search engine results.">
+
+  <!-- Viewport for responsiveness (for mobile optimization) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Character Set (Ensures proper text encoding) -->
+  <meta charset="UTF-8">
+
+  <!-- Author of the website -->
+  <meta name="author" content="Your Name or Company Name">
+
+  <!-- Keywords for SEO (optional, but good practice) -->
+  <meta name="keywords" content="web development, HTML, SEO, meta tags, Open Graph">
+
+  <!-- Open Graph meta tags for social media sharing -->
+  <meta property="og:title" content="Your Page Title for Social Media">
+  <meta property="og:description" content="A short description of the content for social media preview">
+  <meta property="og:image" content="URL of the image to show in social media previews">
+  <meta property="og:url" content="URL of the page to share on social media">
+  <meta property="og:type" content="website"> <!-- Could also be 'article', 'video', etc. -->
+
+  <!-- Twitter Card meta tags for Twitter preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your Page Title for Twitter">
+  <meta name="twitter:description" content="A short description of the page for Twitter">
+  <meta name="twitter:image" content="URL of the image for Twitter preview">
+  <title>My Personal Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+
+  <header role="banner">
+    <nav >
+        <div class="container d-flex justify-content-between align-items-center py-3">
+          <!-- Logo Image -->
+          <a href="#hero">
+            <img src="https://dcassetcdn.com/design_img/710224/440153/440153_4538540_710224_image.jpg" alt="Logo" style="height: 70px;border-radius: 10px;width: 100%;">
+          </a>
+          <!-- Navigation Menu -->
+          <nav>
+            <ul class="nav" >
+              <li class="nav-item" ><a href="#hero" class="nav-link" >Home</a></li>
+              <li class="nav-item" ><a href="#about" class="nav-link" >About</a></li>
+              <li class="nav-item" ><a href="#project" class="nav-link" >Project</a></li>
+              <li class="nav-item" ><a href="#contact" class="nav-link" >Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section with Background Video -->
+ <section id="hero" class="hero-section">
+   <video autoplay muted loop>
+     <source src="a/web.mp4" type="video/mp4">
+   
+   </video>
+   <div class="hero-content">
+       <div class="wrapper two">
+           <div class="neon">
+               <h3 style="font-size: 100px;">Building the Future of the Web</h3>
+               <p style="font-size: 40px; color: blue;"></p>
+           </div>
+       </div>
+    
+     <a href="#contact" class="btn btn-success mt-3">Learn More</a>
+   </div>
+ </section>
+
+</main>
+  <div id="main-content">
+
+
+
+
+  
+    <section>
+        <div class="neon">
+            <h3 style="font-size: 100px; text-align: center;">About Me</h3>
+            <p style="font-size: 40px; color: rgb(184, 59, 59);"></p>
+        </div>
+       <div id="about">
+        <img src="https://as1.ftcdn.net/jpg/06/17/57/14/1000_F_617571490_Lagtv4frKo0T4zoElZsldDuzznAATG10.webp" alt="A photo of [Your Name]">
+        <div id="about-text">
+         <span style="color: rgb(41, 18, 212); font-weight: bold;text-decoration: underline; font-family: 'Times New Roman', Times, serif; font-size: 30px;">About us:</span>
+          <p style="font-family: Arial, Helvetica, sans-serif;font-weight: 500;">"I'm [ABC], a skilled web developer with a strong background in both front-end and back-end development. My expertise includes HTML5, CSS3, JavaScript, React, and Node.js, and I’m experienced in working with databases like MySQL and MongoDB. I specialize in building fast, scalable websites that prioritize performance and user experience. I’m always learning new technologies to stay ahead of industry trends and to deliver the best solutions for my clients."
+
+          </p>
+          <aside>
+            <h2 style="color: rgb(227, 35, 105); font-weight: bold;text-decoration: underline; font-style: italic; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> More About Me :</h2>
+            <p><span style="color: rgb(41, 18, 212); font-weight: bold;text-decoration: underline; font-style: italic;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Hobbies:</span>  Photography, Hiking</p>
+            <p> <span style="color: rgb(41, 18, 212); font-weight: bold;text-decoration: underline; font-style: italic;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Achievements:</span>  Built a popular open-source project</p>
+          </aside>
+        </div>
+       </div>
+     
+      </section>
+      <section id="project" class="projects py-5">
+        <h2 class="text-center mb-4">My Web Development Projects</h2>
+      
+        <div class="container">
+          <div class="row g-4">
+            <!-- Project 1 -->
+            <article class="col-md-4 col-sm-6">
+              <figure class="project">
+                <img src="https://www.oxfordwebstudio.com/user/pages/06.da-li-znate/sta-je-html/sta-je-html.jpg" alt="Screenshot of Project 1" class="img-fluid rounded-3" />
+                <figcaption class="overlay text-center text-white" style="padding-top: 60px;">
+                  <h3 style="color: rgb(25, 214, 25);font-weight: bold; text-decoration: underline;">HTML</h3>
+                  <p>"A responsive personal portfolio website built with HTML, CSS, and JavaScript. Features interactive elements and smooth animations."</p>
+                </figcaption>
+              </figure>
+            </article>
+      
+            <!-- Project 2 -->
+            <article class="col-md-4 col-sm-6">
+              <figure class="project">
+                <img src="https://www.oxfordwebstudio.com/user/pages/06.da-li-znate/sta-je-css/sta-je-css.png" alt="Screenshot of Project 2" class="img-fluid rounded-3" />
+                <figcaption class="overlay text-center text-white" style="padding-top: 60px;">
+                  <h3 style="color: rgb(25, 214, 25);font-weight: bold; text-decoration: underline;">CSS</h3>
+                  <p>"An e-commerce site built using React and Node.js, featuring a fully functional shopping cart, user authentication, and payment gateway integration."</p>
+       
+                </figcaption>
+              </figure>
+            </article>
+      
+            <!-- Project 3 -->
+            <article class="col-md-4 col-sm-6">
+              <figure class="project">
+                <img src="https://blog-img.speedcurve.com/img/498/javascript.gif?auto=format,compress&fit=max&w=2000" alt="Screenshot of Project 3" class="img-fluid rounded-3" />
+                <figcaption class="overlay text-center text-white" style="padding-top: 60px;">
+                  <h3 style="color: rgb(25, 214, 25);font-weight: bold; text-decoration: underline;">Javascript</h3>
+                  <p>"A full-stack blog platform built with Django, providing CRUD functionalities for posts, user management, and comments."</p>
+        
+                </figcaption>
+              </figure>
+            </article>
+          </div>
+        </div>
+      </section>
+      
+
+
+      
+  <!-- Contact Section -->
+  <section id="contact" class="container py-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <div class="d-flex flex-wrap align-items-center">
+      <!-- Contact Form -->
+      <form class="flex-grow-1 me-4" style="max-width: 600px;" onsubmit="return handleSubmit(event)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" pattern="[6-9][0-9]{9}" placeholder="9876543210" class="form-control" id="phone" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </form>
+
+      <!-- Contact Image -->
+      <div class="contact-image ms-4" style="max-width: 400px;">
+        <img src="https://thumbs.dreamstime.com/z/woman-student-work-computer-talking-smart-phone-use-laptop-sitting-table-kitchen-freelancer-working-woman-108624869.jpg?ct=jpeg" alt="Contact Us" class="img-fluid rounded">
+      </div>
+    </div>
+  </section>
+
+  <section class="responsive-media py-5">
+    <h2 class="text-center mb-4">Responsive Images and Video</h2>
+  
+    <div class="container">
+      <div class="row">
+        <!-- Image 1 -->
+        <div class="col-12">
+          <picture>
+            <!-- Image for screens up to 600px wide -->
+            <source srcset="large.jpg" media="(max-width: 600px)" />
+            <!-- Image for screens from 601px to 1024px -->
+            <source srcset="medius.jpg" media="(max-width: 1024px)" />
+            <!-- Default image for larger screens -->
+            <img src="https://www.freecodecamp.org/news/content/images/size/w2000/2024/05/cover-img.jpg" alt="Responsive Image" class="img-fluid" />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="responsive-video py-5">
+    <h2 class="text-center mb-4">Responsive Video</h2>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="video-wrapper">
+            <iframe src="a/web.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section>
+      <h2 style="text-align: center; color: blue;">Portfolio Stats</h2>
+      <div class="container mt-4">
+        <div class="table-responsive">
+          <table class="table table-bordered w-100">
+            <caption class="text-center fw-bold">Portfolio Timeline</caption>
+            <!-- Define column groups and widths -->
+            <colgroup>
+              <col style="width: 20%;">
+              <col style="width: 30%;">
+              <col style="width: 50%;">
+            </colgroup>
+            <thead class="table-light" >
+              <tr >
+                <th style="background-color: rgb(168, 224, 15);text-align: center;" scope="col">Year</th>
+                <th style="background-color: rgb(168, 224, 15);text-align: center;" scope="col">Project</th>
+                <th style="background-color: rgb(168, 224, 15);text-align: center;" scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2020</td>
+                <td>Portfolio Website</td>
+                <td>
+                  Developed a responsive portfolio website to showcase skills and projects.
+                </td>
+              </tr>
+              <tr>
+                <td>2021</td>
+                <td>E-commerce Platform</td>
+                <td>
+                  Built a full-featured e-commerce site using modern web technologies.
+                </td>
+              </tr>
+              <tr>
+                <td>2022</td>
+                <td>Blog Platform</td>
+                <td>
+                  Created a dynamic blog platform with content management and user authentication.
+                </td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td>Mobile App</td>
+                <td>
+                  Launched a cross-platform mobile app with intuitive UI and powerful features.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+ <section>
+    <h2 style="text-align: center;">Interactive Elements</h2>
+   <div> 
+    <details>
+        <summary>Explore Web Development Technologies</summary>
+        <p>
+          Discover the power of HTML, CSS, JavaScript, and modern frameworks like React, Angular, and Vue.js. These technologies work together to create responsive and dynamic websites and applications.
+        </p>
+      </details>
+
+
+      <section style="text-align: center;">
+        <h2>Contact Us</h2>
+        <button id="contactBtn" class="button" style="margin-bottom: 20px;">Send Message</button>
+        
+        <dialog id="contactDialog">
+          <h3>Thank You!</h3>
+          <p>Your message has been sent successfully. We will get back to you soon.</p>
+          <button id="closeDialogBtn" class="button">Close</button>
+        </dialog>
+      </section>
+   </div>
+  
+ </section>
+   
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Portfolio. All Rights Reserved.</p>
+    <div class="social-links">
+      <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <script> function handleSubmit(event) {
+    // Prevent default form submission behavior
+    event.preventDefault();
+    
+    // Get the values from the Name and Phone fields
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    
+    // Display an alert with the Name and Phone values
+    alert(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}`);
+    
+    // Return false to stop further submission if necessary
+    return false;
+  }</script>
+
+
+<script>
+    // Get dialog and button elements
+    const contactDialog = document.getElementById('contactDialog');
+    const contactBtn = document.getElementById('contactBtn');
+    const closeDialogBtn = document.getElementById('closeDialogBtn');
+
+    // Open the modal dialog when "Send Message" button is clicked
+    contactBtn.addEventListener('click', () => {
+      contactDialog.showModal();
+    });
+
+    // Close the modal dialog when "Close" button is clicked
+    closeDialogBtn.addEventListener('click', () => {
+      contactDialog.close();
+    });
+  </script>
+</body>
+</html>

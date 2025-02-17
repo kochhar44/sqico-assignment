@@ -1,0 +1,236 @@
+header{
+    background-color: black;
+   
+   }
+   .nav-link
+   {
+    color: #ffffff;
+   }
+
+
+
+   body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+
+  /* Product hover effect */
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card img {
+      width: 100%;
+    border-radius: 12px;
+
+  }
+
+  .feature-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 12px;
+  }
+
+  .feature-card:hover .feature-text {
+    opacity: 1;
+  }
+  /* Hero section styling */
+  .hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+
+  .hero-section video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .hero-content {
+    z-index: 2;
+  }
+
+  .feature-card, .testimonial-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    background-color: #ffffff;
+    text-align: center;
+  }
+
+  footer {
+    background-color: #343a40;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .social-links a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+
+  .contact-image img {
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+  }
+
+  .wrapper.two {
+
+
+  font-family: "Play", sans-serif;
+}
+.neon h3 {
+  margin: 1rem auto;
+  animation: neon 1s ease infinite;
+ 
+}
+@keyframes neon {
+  0%,
+  100% {
+      text-shadow: 0 0 10px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 20px #ef00e3a8, 0 0 2px #fed128, 2px 2px 2px #806914;
+      color: #f5efcb;
+  }
+  50% {
+      text-shadow: 0 0 2px #800e0b, 0 0 5px #800e0b, 0 0 5px #800e0b, 0 0 5px #800e0b, 0 0 2px #800e0b, 4px 4px 2px #40340a;
+      color: #eda0d3;
+  }
+}
+
+
+#about {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+ 
+  }
+
+  #about img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 10px;
+    flex: 1 1 250px;
+  }
+
+  #about-text {
+    flex: 2 1 300px;
+  }
+
+
+  .project {
+    position: relative; /* Important for positioning the overlay text */
+    overflow: hidden; /* Hide any overflowing content when image is hovered */
+  }
+  
+  .project img {
+    transition: transform 0.3s ease; /* Smooth transition for image zoom effect */
+  }
+  
+  .project:hover img {
+    transform: scale(1.1); /* Zoom effect on hover */
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease;
+  }
+  
+  .project:hover .overlay {
+    opacity: 1; /* Show overlay on hover */
+  }
+  
+  .overlay h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+  }
+  
+
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Aspect ratio of 16:9 (9 / 16 = 0.5625) */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  details {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  summary {
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  /* Styling for the dialog modal */
+  dialog {
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  /* Button styling */
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1em;
+  }
