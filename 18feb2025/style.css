@@ -1,0 +1,108 @@
+body {
+    background-color: white;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2B2828;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    background-color: #cc9900;
+  }
+  
+  .LamborghiniImage1 {
+    float: right;
+    margin: 0 0 10px 10px;
+  }
+  
+  figcaption {
+    font-size: 0px
+  }
+  
+  figcaption {
+    font-family: Cambria
+  }
+  
+  figcaption {
+    font-color: #2B2828
+  }
+  
+  h3 {
+    font-size: 40px
+  }
+
+
+  .hero-section {
+    background: url('https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/models_gw/2025/hero.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    color: white;
+    display: flex;
+   
+    flex-direction: column;
+   
+    padding: 20px;
+  }
+  .breadcrumb {
+    background: transparent;
+    color: white;
+  }
+  .breadcrumb-item a {
+    color: #fff;
+    text-decoration: none;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: bold;
+  }
+
+
+
+  .full-width-section {
+    position: relative;
+   
+    overflow: hidden;
+  }
+  
+  .car-image {
+    width: 50%;
+    height: 100vh;
+    object-fit: cover;
+   
+  }
+  
+
+  
+  /* Text Section Styling */
+  .text-section {
+    padding: 50px 0;
+    background-color: #f8f9fa; /* Light background for contrast */
+  }
+  
+  .text-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .text-section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+  }
