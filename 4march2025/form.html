@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .validation-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .validation-message {
+            color: #666;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        .valid {
+            color: green;
+            border-color: green;
+        }
+
+        .invalid {
+            color: red;
+            border-color: red;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Enter username"
+                    required
+                >
+                <span id="usernameIcon" class="validation-icon"></span>
+            </div>
+            <div id="usernameMessage" class="validation-message"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter email"
+                    required
+                >
+                <span id="emailIcon" class="validation-icon"></span>
+            </div>
+            <div id="emailMessage" class="validation-message"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter password"
+                    required
+                >
+                <span id="passwordIcon" class="validation-icon"></span>
+            </div>
+            <div id="passwordMessage" class="validation-message"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="input-wrapper">
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    name="confirmPassword" 
+                    placeholder="Confirm password"
+                    required
+                >
+                <span id="confirmPasswordIcon" class="validation-icon"></span>
+            </div>
+            <div id="confirmPasswordMessage" class="validation-message"></div>
+        </div>
+
+        <button type="submit" id="submitButton" disabled>Register</button>
+    </form>
+
+    <script>
+        // Get form elements
+        const form = document.getElementById('registrationForm');
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const submitButton = document.getElementById('submitButton');
+
+        // Validation functions
+        const validateUsername = (value) => {
+            return value.length >= 3;
+        };
+
+        const validateEmail = (value) => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(value);
+        };
+
+        const validatePassword = (value) => {
+            const hasNumber = /\d/.test(value);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+            return value.length >= 8 && hasNumber && hasSpecialChar;
+        };
+
+        const validateConfirmPassword = (password, confirmPassword) => {
+            return password === confirmPassword;
+        };
+
+        // Validation display functions
+        const showValidation = (input, icon, message, isValid) => {
+            const messageElement = document.getElementById(`${input.id}Message`);
+            const iconElement = document.getElementById(`${input.id}Icon`);
+
+            if (isValid) {
+                input.classList.remove('invalid');
+                input.classList.add('valid');
+                iconElement.innerHTML = '✓';
+                messageElement.textContent = '';
+            } else {
+                input.classList.remove('valid');
+                input.classList.add('invalid');
+                iconElement.innerHTML = '✗';
+                messageElement.textContent = message;
+            }
+        };
+
+        // Real-time validation event listeners
+        username.addEventListener('input', () => {
+            const isValid = validateUsername(username.value);
+            showValidation(
+                username, 
+                document.getElementById('usernameIcon'), 
+                'Username must be at least 3 characters', 
+                isValid
+            );
+            checkFormValidity();
+        });
+
+        email.addEventListener('input', () => {
+            const isValid = validateEmail(email.value);
+            showValidation(
+                email, 
+                document.getElementById('emailIcon'), 
+                'Please enter a valid email address', 
+                isValid
+            );
+            checkFormValidity();
+        });
+
+        password.addEventListener('input', () => {
+            const isValid = validatePassword(password.value);
+            showValidation(
+                password, 
+                document.getElementById('passwordIcon'), 
+                'Password must be at least 8 characters with a number and special character', 
+                isValid
+            );
+            
+            // Also validate confirm password when password changes
+            const confirmPasswordValid = validateConfirmPassword(
+                password.value, 
+                confirmPassword.value
+            );
+            showValidation(
+                confirmPassword, 
+                document.getElementById('confirmPasswordIcon'), 
+                'Passwords must match', 
+                confirmPasswordValid
+            );
+            
+            checkFormValidity();
+        });
+
+        confirmPassword.addEventListener('input', () => {
+            const isValid = validateConfirmPassword(
+                password.value, 
+                confirmPassword.value
+            );
+            showValidation(
+                confirmPassword, 
+                document.getElementById('confirmPasswordIcon'), 
+                'Passwords must match', 
+                isValid
+            );
+            checkFormValidity();
+        });
+
+        // Check overall form validity
+        const checkFormValidity = () => {
+            const isUsernameValid = validateUsername(username.value);
+            const isEmailValid = validateEmail(email.value);
+            const isPasswordValid = validatePassword(password.value);
+            const isConfirmPasswordValid = validateConfirmPassword(
+                password.value, 
+                confirmPassword.value
+            );
+
+            submitButton.disabled = !(
+                isUsernameValid && 
+                isEmailValid && 
+                isPasswordValid && 
+                isConfirmPasswordValid
+            );
+        };
+
+        // Form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to a server
+            alert('Registration successful!');
+        });
+    </script>
+</body>
+</html>

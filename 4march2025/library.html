@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+
+        .list-container {
+            margin-top: 20px;
+        }
+
+        .list-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .status-available {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-borrowed {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Library Management System</h1>
+        
+        <div class="container">
+            <h2 class="section-title">Add Book</h2>
+            <form id="addBookForm">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="bookTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Author</label>
+                    <input type="text" id="bookAuthor" required>
+                </div>
+                <div class="form-group">
+                    <label>ISBN</label>
+                    <input type="text" id="bookISBN" required>
+                </div>
+                <div class="form-group">
+                    <label>Publication Year</label>
+                    <input type="number" id="bookPublicationYear" required>
+                </div>
+                <div class="form-group">
+                    <label>Genre</label>
+                    <select id="bookGenre" required>
+                        <option value="">Select Genre</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Science">Science</option>
+                        <option value="History">History</option>
+                        <option value="Biography">Biography</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Add Book</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">Book Collection</h2>
+            <div id="bookCollectionList"></div>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">Library Members</h2>
+            <form id="addMemberForm">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="memberName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="memberEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Membership Type</label>
+                    <select id="membershipType" required>
+                        <option value="">Select Membership</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Premium">Premium</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Add Member</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Book Class
+        class Book {
+            constructor(title, author, ISBN, publicationYear, genre) {
+                this.title = title;
+                this.author = author;
+                this.ISBN = ISBN;
+                this.publicationYear = publicationYear;
+                this.genre = genre;
+                this.available = true;
+            }
+
+            checkOut() {
+                if (this.available) {
+                    this.available = false;
+                    return true;
+                }
+                return false;
+            }
+
+            return() {
+                this.available = true;
+            }
+
+            getInfo() {
+                return `${this.title} by ${this.author} (${this.publicationYear}) - ${this.genre}`;
+            }
+        }
+
+        // Library Class
+        class Library {
+            constructor(name, location) {
+                this.name = name;
+                this.location = location;
+                this.bookCollection = [];
+                this.members = [];
+            }
+
+            addBook(book) {
+                this.bookCollection.push(book);
+                this.renderBookCollection();
+            }
+
+            removeBook(ISBN) {
+                this.bookCollection = this.bookCollection.filter(book => book.ISBN !== ISBN);
+                this.renderBookCollection();
+            }
+
+            findBookByISBN(ISBN) {
+                return this.bookCollection.find(book => book.ISBN === ISBN);
+            }
+
+            findBooksByAuthor(author) {
+                return this.bookCollection.filter(book => book.author.toLowerCase().includes(author.toLowerCase()));
+            }
+
+            findBooksByGenre(genre) {
+                return this.bookCollection.filter(book => book.genre === genre);
+            }
+
+            getAvailableBooks() {
+                return this.bookCollection.filter(book => book.available);
+            }
+
+            getBorrowedBooks() {
+                return this.bookCollection.filter(book => !book.available);
+            }
+
+            renderBookCollection() {
+                const bookList = document.getElementById('bookCollectionList');
+                bookList.innerHTML = '';
+
+                this.bookCollection.forEach(book => {
+                    const bookItem = document.createElement('div');
+                    bookItem.classList.add('list-item');
+                    bookItem.innerHTML = `
+                        <strong>${book.title}</strong> by ${book.author}
+                        <br>ISBN: ${book.ISBN}
+                        <br>Year: ${book.publicationYear}
+                        <br>Genre: ${book.genre}
+                        <br>Status: <span class="${book.available ? 'status-available' : 'status-borrowed'}">
+                            ${book.available ? 'Available' : 'Borrowed'}
+                        </span>
+                        <br>
+                        <button class="btn ${book.available ? '' : 'btn-danger'}" onclick="library.toggleBookAvailability('${book.ISBN}')">
+                            ${book.available ? 'Borrow' : 'Return'}
+                        </button>
+                    `;
+                    bookList.appendChild(bookItem);
+                });
+            }
+
+            toggleBookAvailability(ISBN) {
+                const book = this.findBookByISBN(ISBN);
+                if (book) {
+                    if (book.available) {
+                        book.checkOut();
+                    } else {
+                        book.return();
+                    }
+                    this.renderBookCollection();
+                }
+            }
+        }
+
+        // User Class
+        class User {
+            constructor(id, name, email) {
+                this.id = id;
+                this.name = name;
+                this.email = email;
+                this.borrowedBooks = [];
+            }
+
+            borrowBook(book) {
+                if (book.checkOut()) {
+                    this.borrowedBooks.push(book);
+                    return true;
+                }
+                return false;
+            }
+
+            returnBook(book) {
+                book.return();
+                this.borrowedBooks = this.borrowedBooks.filter(b => b !== book);
+            }
+
+            getBorrowedBooks() {
+                return this.borrowedBooks;
+            }
+        }
+
+        // LibraryMember Class
+        class LibraryMember extends User {
+            constructor(id, name, email, membershipType) {
+                super(id, name, email);
+                this.membershipDate = new Date();
+                this.membershipType = membershipType;
+            }
+
+            renewMembership() {
+                this.membershipDate = new Date();
+            }
+
+            getMembershipStatus() {
+                const currentDate = new Date();
+                const membershipAge = (currentDate - this.membershipDate) / (1000 * 60 * 60 * 24 * 365);
+                return {
+                    type: this.membershipType,
+                    membershipDate: this.membershipDate,
+                    isValid: membershipAge < 1
+                };
+            }
+        }
+
+        // Initialize Library
+        const library = new Library('City Central Library', 'Main Street');
+
+        // Add Book Form Submission
+        document.getElementById('addBookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const book = new Book(
+                document.getElementById('bookTitle').value,
+                document.getElementById('bookAuthor').value,
+                document.getElementById('bookISBN').value,
+                document.getElementById('bookPublicationYear').value,
+                document.getElementById('bookGenre').value
+            );
+            library.addBook(book);
+            this.reset();
+        });
+
+        // Add Member Form Submission
+        document.getElementById('addMemberForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const member = new LibraryMember(
+                Date.now().toString(),
+                document.getElementById('memberName').value,
+                document.getElementById('memberEmail').value,
+                document.getElementById('membershipType').value
+            );
+            library.members.push(member);
+            console.log('Member added:', member);
+            this.reset();
+        });
+    </script>
+</body>
+</html>

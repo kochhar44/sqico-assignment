@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nested Comment System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        <h1 class="text-2xl font-bold mb-6 text-center">Nested Comment System</h1>
+        
+        <!-- New Comment Input -->
+        <div class="mb-6">
+            <textarea 
+                id="newCommentInput" 
+                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Add a new comment..."
+                rows="3"
+            ></textarea>
+            <button 
+                id="addCommentBtn"
+                class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            >
+                Add Comment
+            </button>
+        </div>
+
+        <!-- Comments Container -->
+        <div id="commentsContainer" class="space-y-4"></div>
+    </div>
+
+    <script>
+        // Comment System Class
+        class CommentSystem {
+            constructor() {
+                this.comments = [];
+                this.selectedCommentId = null;
+                
+                // Get DOM elements
+                this.newCommentInput = document.getElementById('newCommentInput');
+                this.addCommentBtn = document.getElementById('addCommentBtn');
+                this.commentsContainer = document.getElementById('commentsContainer');
+
+                // Bind methods
+                this.addComment = this.addComment.bind(this);
+                this.renderComments = this.renderComments.bind(this);
+
+                // Add event listeners
+                this.addCommentBtn.addEventListener('click', () => {
+                    const commentText = this.newCommentInput.value.trim();
+                    if (commentText) {
+                        // Add as top-level comment
+                        this.addComment(commentText);
+                        this.newCommentInput.value = ''; // Clear input
+                    }
+                });
+            }
+
+            // Generate unique ID
+            generateId() {
+                return Date.now().toString() + Math.random().toString(36).substr(2, 9);
+            }
+
+            // Add a new comment
+            addComment(text, parentId = null) {
+                const newComment = {
+                    id: this.generateId(),
+                    text: text,
+                    parentId: parentId,
+                    children: [],
+                    depth: parentId ? this.findCommentDepth(parentId) + 1 : 0
+                };
+
+                if (parentId) {
+                    // Find parent and add as child
+                    const parentComment = this.findCommentById(parentId);
+                    if (parentComment) {
+                        parentComment.children.push(newComment);
+                    }
+                } else {
+                    // Add as top-level comment
+                    this.comments.push(newComment);
+                }
+
+                // Re-render comments
+                this.renderComments();
+            }
+
+            // Find comment by ID (recursive search)
+            findCommentById(id, commentList = this.comments) {
+                for (let comment of commentList) {
+                    if (comment.id === id) return comment;
+                    
+                    // Recursively search children
+                    if (comment.children.length) {
+                        const foundInChildren = this.findCommentById(id, comment.children);
+                        if (foundInChildren) return foundInChildren;
+                    }
+                }
+                return null;
+            }
+
+            // Find comment depth
+            findCommentDepth(parentId, currentDepth = 0) {
+                const parentComment = this.findCommentById(parentId);
+                return parentComment ? parentComment.depth : currentDepth;
+            }
+
+            // Render comments
+            renderComments() {
+                // Clear existing comments
+                this.commentsContainer.innerHTML = '';
+                
+                // Render top-level comments
+                this.renderCommentList(this.comments, this.commentsContainer);
+            }
+
+            // Render comment list (recursive)
+            renderCommentList(comments, container, isNested = false) {
+                comments.forEach(comment => {
+                    // Create comment element
+                    const commentElement = this.createCommentElement(comment);
+                    container.appendChild(commentElement);
+
+                    // Render children if exist
+                    if (comment.children.length) {
+                        const childContainer = document.createElement('div');
+                        childContainer.classList.add('pl-8', 'border-l-2', 'border-gray-200');
+                        this.renderCommentList(comment.children, childContainer, true);
+                        container.appendChild(childContainer);
+                    }
+                });
+            }
+
+            // Create individual comment element
+            createCommentElement(comment) {
+                // Create comment wrapper
+                const commentWrapper = document.createElement('div');
+                commentWrapper.classList.add(
+                    'comment-item', 
+                    'p-4', 
+                    'rounded-lg', 
+                    'bg-gray-50', 
+                    'mb-2'
+                );
+
+                // Comment text
+                const commentText = document.createElement('p');
+                commentText.textContent = comment.text;
+                commentText.classList.add('mb-2');
+
+                // Action buttons container
+                const actionContainer = document.createElement('div');
+                actionContainer.classList.add('flex', 'space-x-2');
+
+                // Reply button
+                const replyButton = document.createElement('button');
+                replyButton.textContent = 'Reply';
+                replyButton.classList.add(
+                    'bg-blue-500', 
+                    'text-white', 
+                    'px-2', 
+                    'py-1', 
+                    'rounded', 
+                    'text-sm'
+                );
+                replyButton.addEventListener('click', () => {
+                    // Prompt for reply text
+                    const replyText = prompt('Enter your reply:');
+                    if (replyText && replyText.trim()) {
+                        // Add reply to this comment
+                        this.addComment(replyText.trim(), comment.id);
+                    }
+                });
+
+                // Append elements
+                actionContainer.appendChild(replyButton);
+                commentWrapper.appendChild(commentText);
+                commentWrapper.appendChild(actionContainer);
+
+                return commentWrapper;
+            }
+        }
+
+        // Initialize comment system when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create global comment system instance
+            window.commentSystem = new CommentSystem();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-commerce Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .cart-container {
+            margin-top: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="product-list" class="product-container"></div>
+    <div id="cart" class="cart-container">
+        <h2>Shopping Cart</h2>
+        <div id="cart-items"></div>
+        <div id="cart-total"></div>
+    </div>
+
+    <script>
+        // Product Class
+        class Product {
+            constructor(id, name, price, description, stockQuantity) {
+                this.id = id;
+                this.name = name;
+                this.price = price;
+                this.description = description;
+                this.stockQuantity = stockQuantity;
+            }
+
+            getDisplayInfo() {
+                return `${this.name} - $${this.price.toFixed(2)}`;
+            }
+
+            updateStock(quantity) {
+                this.stockQuantity += quantity;
+                return this.stockQuantity;
+            }
+
+            isInStock() {
+                return this.stockQuantity > 0;
+            }
+        }
+
+        // ShoppingCart Class
+        class ShoppingCart {
+            constructor() {
+                this.items = [];
+            }
+
+            addItem(product, quantity = 1) {
+                const existingItem = this.items.find(item => item.product.id === product.id);
+                
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    this.items.push({ product, quantity });
+                }
+                
+                this.updateCartDisplay();
+            }
+
+            removeItem(productId) {
+                this.items = this.items.filter(item => item.product.id !== productId);
+                this.updateCartDisplay();
+            }
+
+            calculateTotal() {
+                return this.items.reduce((total, item) => 
+                    total + (item.product.price * item.quantity), 0);
+            }
+
+            updateCartDisplay() {
+                const cartItemsEl = document.getElementById('cart-items');
+                const cartTotalEl = document.getElementById('cart-total');
+                
+                cartItemsEl.innerHTML = this.items.map(item => `
+                    <div>
+                        ${item.product.name} - 
+                        Quantity: ${item.quantity} - 
+                        $${(item.product.price * item.quantity).toFixed(2)}
+                        <button onclick="cart.removeItem(${item.product.id})">Remove</button>
+                    </div>
+                `).join('');
+
+                cartTotalEl.innerHTML = `Total: $${this.calculateTotal().toFixed(2)}`;
+            }
+        }
+
+        // Create products
+        const products = [
+            new Product(1, 'Laptop', 999.99, 'High-performance laptop', 10),
+            new Product(2, 'Smartphone', 599.99, 'Latest model smartphone', 15),
+            new Product(3, 'Headphones', 199.99, 'Noise-cancelling headphones', 20),
+            new Product(4, 'Smartwatch', 249.99, 'Advanced fitness smartwatch', 12)
+        ];
+
+        // Initialize shopping cart
+        const cart = new ShoppingCart();
+
+        // Render products
+        const productListEl = document.getElementById('product-list');
+        products.forEach(product => {
+            const productEl = document.createElement('div');
+            productEl.className = 'product-card';
+            productEl.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>Price: $${product.price.toFixed(2)}</p>
+                <p>In Stock: ${product.stockQuantity}</p>
+                <button onclick="cart.addItem(products[${product.id - 1}])">Add to Cart</button>
+            `;
+            productListEl.appendChild(productEl);
+        });
+    </script>
+</body>
+</html>
